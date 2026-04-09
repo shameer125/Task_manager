@@ -22,7 +22,6 @@ function App() {
     }
   };
 
-
   const addTask = async () => {
     if (!title.trim()) return;
     try {
@@ -34,7 +33,6 @@ function App() {
     }
   };
 
-
   const deleteTask = async (id) => {
     try {
       await axios.delete(`${API}/${id}`);
@@ -43,7 +41,6 @@ function App() {
       setError("Failed to delete task");
     }
   };
-
 
   useEffect(() => {
     fetchTasks();
@@ -74,6 +71,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

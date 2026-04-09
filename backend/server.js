@@ -25,8 +25,7 @@ if (!mongoURI) {
   process.exit(1);
 }
 
-mongoose
-  .connect(mongoURI)
+mongoose.connect(mongoURI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 

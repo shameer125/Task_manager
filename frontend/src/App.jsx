@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API = "http://localhost:5000/api/tasks";
+// ✅ PRODUCTION + LOCAL SAFE API URL
+const API = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api/tasks`
+  : "http://localhost:5000/api/tasks";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -49,17 +52,22 @@ function App() {
   return (
     <div style={{ padding: 20 }}>
       <h1>Task Manager</h1>
+
       {error && <p style={{ color: "red" }}>{error}</p>}
+
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Enter task"
         disabled={loading}
       />
+
       <button onClick={addTask} disabled={loading || !title.trim()}>
         Add
       </button>
+
       {loading && <p>Loading...</p>}
+
       <ul>
         {tasks.map((t) => (
           <li key={t._id}>

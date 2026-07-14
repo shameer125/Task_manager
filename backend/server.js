@@ -10,7 +10,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://task-manager-t56r.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://task-manager-frontend-kappa-jet.vercel.app",
+    ],
     credentials: true,
   }),
 );

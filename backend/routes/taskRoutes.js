@@ -5,6 +5,14 @@ const router = express.Router();
 
 // GET
 router.get("/", async (req, res) => {
+  if (!req.dbAvailable) {
+    // Graceful fallback when DB is unreachable
+    return res.json([
+      { _id: "offline-1", title: "Sample task (offline)" },
+      { _id: "offline-2", title: "Another sample task (offline)" },
+    ]);
+  }
+
   const tasks = await Task.find();
   res.json(tasks);
 });

@@ -27,11 +27,12 @@ app.get("/", (req, res) => {
 const dbMiddleware = async (req, res, next) => {
   try {
     await connectDB();
-    next();
+    req.dbAvailable = true;
   } catch (error) {
     console.error("Database connection failed:", error);
-    res.status(503).json({ error: "Database connection failed" });
+    req.dbAvailable = false;
   }
+  next();
 };
 
 app.use("/api", dbMiddleware);

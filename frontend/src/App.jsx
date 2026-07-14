@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 // ✅ PRODUCTION + LOCAL SAFE API URL
-const API = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api/tasks`
-  : "http://localhost:5000/api/tasks";
+const API = `${import.meta.env.VITE_API_URL}/api/tasks`;
 
 function App() {
   const [tasks, setTasks] = useState([]);

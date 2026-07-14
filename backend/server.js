@@ -20,16 +20,21 @@ app.use(
 
 app.use(express.json());
 
-// Connect MongoDB for each serverless invocation (reuses existing connection)
-app.use(async (req, res, next) => {
-  await connectDB();
-  next();
-});
-
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
+const dbMiddleware = async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    res.status(503).json({ error: "Database connection failed" });
+  }
+};
+
+app.use("/api", dbMiddleware);
 app.use("/api/tasks", taskRoutes);
 
 export default app;

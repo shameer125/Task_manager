@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const API_BASE =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
+  (import.meta.env.VITE_API_URL || "")
+    .replace(/^(?!https?:\/\/)/, "https://")
+    .replace(/\/$/, "") ||
   (typeof window !== "undefined"
     ? window.location.origin
     : "http://localhost:3000");
